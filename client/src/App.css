@@ -20,17 +20,20 @@
 .table td{
   text-align: center;
   height: 5rem;
-
+  min-width:15rem;
 }
-
+small{
+  font-size: 0.7rem;
+  font-style: italic;
+}
 .companyLogo img{
-  max-width: 50px;
-  max-height: 50px;
-  width: 50px;
-  height: 50px;
+  max-width: 15rem;
+  max-height: 15rem;
+  width: 100px;
+  height: 100px;
 }
 .companyLogo{
-  display: flex;
+  
   justify-content: center;
   align-items: center;
 }
@@ -41,33 +44,26 @@
   align-items: center;
 }
  
+.modal-overlay {
+  position: fixed;
+  top: 20%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+  background-color: rgba(42, 209, 225, 0.5);
+}
+.modal {
+  padding: 16px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 
-/* <Card className="flex-row">
-          <Col lg={1}>
-            <Card.Header
-              style={{
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              Company
-            </Card.Header>
-          </Col>
-          <Col lg={2}>
-            <Card.Body className="companyLogo">
-              <img src="logo192.png" alt="company logo" />
-            </Card.Body>
-          </Col>
-          <Col lg={2}>
-            <Card.Body className="companyLogo">
-              <img src="logo192.png" alt="company logo" />
-            </Card.Body>
-          </Col>
-          <Col lg={2}>
-            <Card.Body className="companyLogo">
-              <img src="logo192.png" alt="company logo" />
-            </Card.Body>
-          </Col>
-        </Card> */
+.collaspe ::after{
+  background: #000;
+}
+
