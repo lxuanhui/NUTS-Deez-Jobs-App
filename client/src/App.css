@@ -1,8 +1,73 @@
-.searchbox{
+/* .searchbox{
     width: 100%;
-    margin-top: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;
   
-  }
+  } */
+
+.row{
+  margin-bottom: 1rem;
+  /* width: 100vw; */
+}
+.table th{
+  width: 10%;
+}
+
+.table tr{  
+  height: 5rem;
+}
+.table td{
+  text-align: center;
+  height: 5rem;
+
+}
+
+.companyLogo img{
+  max-width: 50px;
+  max-height: 50px;
+  width: 50px;
+  height: 50px;
+}
+.companyLogo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ 
+
+/* <Card className="flex-row">
+          <Col lg={1}>
+            <Card.Header
+              style={{
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              Company
+            </Card.Header>
+          </Col>
+          <Col lg={2}>
+            <Card.Body className="companyLogo">
+              <img src="logo192.png" alt="company logo" />
+            </Card.Body>
+          </Col>
+          <Col lg={2}>
+            <Card.Body className="companyLogo">
+              <img src="logo192.png" alt="company logo" />
+            </Card.Body>
+          </Col>
+          <Col lg={2}>
+            <Card.Body className="companyLogo">
+              <img src="logo192.png" alt="company logo" />
+            </Card.Body>
+          </Col>
+        </Card> */
