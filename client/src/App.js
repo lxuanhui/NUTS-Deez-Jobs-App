@@ -5,6 +5,7 @@ import {Form, Button, Stack, Collapse, Card, Col} from "react-bootstrap";
 import JobTable from './components/table';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import RangeSlider from 'react-bootstrap-range-slider';
+import { Helmet } from 'react-helmet';
 
 function App() {
   const [searchfield, setSearchfield] = useState('Software Engineer');
@@ -51,27 +52,40 @@ function App() {
 
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        fetch('http://localhost:5000/time', {
-            method: 'GET',
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data); // Log the response data
-          setData(data);
-        })
-        .catch(error => console.log(error));
+      event.preventDefault();
+      const requestBody = { 
+        'searchfield': searchfield,
+      };
+      console.log(requestBody);
+      fetch('http://localhost:5000/time', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        setData(data);
+      })
+      .catch(error => console.log(error));
     };
     
 
     
   return (
     <div className="App"> 
-      
+      <Helmet>
+        <title>NUT JOB</title>
+        <meta name="DEEZ JOBS" content="HAVE SOME OF DEEZ JOBS" />
+        <link rel="icon"  href="NUTS.png" sizes="16x16" />
+      </Helmet>
+          
         <Form onSubmit={handleSubmit}>
             <Form.Group className="p-4">      
               <Stack direction='vertical' gap = {3}>
-                <Stack direction="horizontal" gap={5}>        
+                <Stack direction="horizontal" gap={5}>
                   <Form.Label className='text-right ml-3'>Search Job Titles: </Form.Label>
                   <Form.Control className='w-50' type="search" placeholder={searchfield} onChange={handleChange}/>
                   <div  className="d-grid gap-2">
