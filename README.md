@@ -41,8 +41,14 @@ https://github.com/shxnying/NUTS-Nut-Job-App.git
   * Extract the file from the zip folder.
   
   * Use the chromedriver file in your Selenium automation scripts to control a Google Chrome browser instance.
+  
+ 3. Install node and python dependencies
+ 
+   * pip install -r requirements.txt -python
+   * node install -nodeJS
+ 
 
-3. Start the app.
+4. Start the app.
 
 Contributing
 ---------------
