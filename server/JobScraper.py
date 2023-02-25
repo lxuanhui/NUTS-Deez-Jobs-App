@@ -37,6 +37,7 @@ for job in job_elements:
     job_title = job.find_element(By.CLASS_NAME, "_1hr6tkx5._1hr6tkx7._1hr6tkxa.sx2jih0.sx2jihf.zcydq8h")#job_title.text
     job_link = job.find_element(By.CSS_SELECTOR, 'a._1hr6tkx5._1hr6tkx7._1hr6tkxa.sx2jih0.sx2jihf.zcydq8h')
     job_link_href = job_link.get_attribute('href')
+    
 
 # Find all elements with class "sx2jih0 rqoqz6" -- Company Logo
 images = driver.find_elements(By.CSS_SELECTOR, 'img.sx2jih0.rqoqz6')
@@ -44,7 +45,17 @@ for image in images:
     src = image.get_attribute('src')
 
 # Find all elements with class "sx2jih0 rqoqz6" -- Company Name
-target_elements = driver.find_elements(By.CSS_SELECTOR,'a[data-automation="jobCardCompanyLink"].sx2jih0.sx2jihf.rqoqz4')
+company_names = driver.find_elements(By.CSS_SELECTOR,'a[data-automation="jobCardCompanyLink"].sx2jih0.sx2jihf.rqoqz4')
 
+for name in company_names:
+    comapny_name = name.text.strip()
+
+# Scrape for Salary
+target_elements = driver.find_elements(By.CSS_SELECTOR,".sx2jih0 .sx2jih0.zcydq84u.es8sxo0.es8sxo3.es8sxo21.es8sxoh")
+salary = ''
+sal=[]
 for element in target_elements:
-    comapny_name = element.text.strip()
+    sal.append(element.text)
+for i in range(len(sal)):
+    if 'monthly' not in sal[i]:
+        sal[i] = ''
