@@ -49,10 +49,10 @@ def grabJobScraper(searchKey):
         tempDict = {}
         tempDict['logo'] = str(src)
         tempDict['companyName'] = company_name.text
-        tempDict['salary'] = [int(salaryArray[0].removeprefix('$')), int(salaryArray[2]), 'GrabJob'] if len(salaryArray) > 3 else [int(salaryArray[0].removeprefix('$')), int(salaryArray[0].removeprefix('$')), 'GrabJob']
+        tempDict['salary'] = [int(salaryArray[0].removeprefix('$').replace(',','')), int(salaryArray[2].replace(',','')), 'GrabJob'] if len(salaryArray) > 3 else [int(salaryArray[0].removeprefix('$').replace(',','')), int(salaryArray[0].removeprefix('$').replace(',','')), 'GrabJob']
         tempDict['yearOfExperience'] = ['0 years']
-        tempDict['noOfApplicants'] = None
-        tempDict['typeOfWork'] = None
+        tempDict['noOfApplicants'] = 0
+        tempDict['typeOfWork'] = ""
         tempDict['source'] = ['GrabJob', str(job_link_href)]
         tempDict['jobTitle'] = job_title.text
 

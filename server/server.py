@@ -18,20 +18,25 @@ def getTime():
     # data = request.data()
     # print(data)
 
-    grabJobData = grabJobScraper("software engineer")
-    jobStreetData = jobStreetScraper("software engineer")
-    print(grabJobData)
-    print(jobStreetData)
+    
 
-    newData = grabJobData + jobStreetData
+    
 
     if request.method == 'GET':
         print('GET')
 
     if request.method == 'POST':
         print("POST")
+        data = request.get_json()
+        # print(data)
+        # print(data['searchfield'])
+        grabJobData = grabJobScraper(data['searchfield'])
+        jobStreetData = jobStreetScraper(data['searchfield'])
+        print(grabJobData)
+        print(jobStreetData)
+        newData = grabJobData + jobStreetData
 
-    return newData
+        return newData
         # {
 
         # {

@@ -1,3 +1,4 @@
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -71,6 +72,7 @@ def jobStreetScraper(searchKey):
     with webdriver.Chrome(options=op, executable_path="/usr/local/bin/chromedriver") as driver:
         for i, link in enumerate(job_link_dict):
             actions = ActionChains(driver)
+            time.sleep(1)
 
             # Navigate to the URL
             driver.get(link)
@@ -93,8 +95,8 @@ def jobStreetScraper(searchKey):
         # tempDict['salary'] = [sal[i],"JobStreet"] if i < len(sal) else ["","JobStreet"]
         tempDict['salary'] = [int(float(salaryArray[1][:-1])*1000), int(float(salaryArray[3][:-1])*1000)] if len(salaryArray) > 3 else ['', 'JobStreet']
         tempDict['yearOfExperience'] = yearsOfExpDict[i] if i in yearsOfExpDict else []
-        tempDict['noOfApplicants'] = None
-        tempDict['typeOfWork'] = None
+        tempDict['noOfApplicants'] = 0
+        tempDict['typeOfWork'] = ""
         tempDict['source'] = ["JobStreet", job_link_dict[i]]
 
         searchQueryDict.append(tempDict)

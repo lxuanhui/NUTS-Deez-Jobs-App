@@ -67,7 +67,7 @@ const JobTable = (props) => {
     useEffect(() => {
         let sourcetd = [];
         for (let key in jobsObject) {
-            sourcetd.push(<td className='companySource'><a href={jobsObject[key].source[1]}>{jobsObject[key].source[0]}</a></td>);
+            sourcetd.push(<td className='companySource'><a href={jobsObject[key].source[1]} target='_blank'>{jobsObject[key].source[0]}</a></td>);
         }
         setSourcetd(sourcetd);
     }, [jobsObject]);
