@@ -65,7 +65,7 @@ def jobStreetScraper(searchKey):
         sal.append(element.text)
     for i in range(len(sal)):
         if 'monthly' not in sal[i]:
-            sal[i] = ''
+            sal[i] = '0'
 
     driver.close()
 
@@ -97,10 +97,16 @@ def jobStreetScraper(searchKey):
         tempDict['yearOfExperience'] = yearsOfExpDict[i] if i in yearsOfExpDict else []
         tempDict['noOfApplicants'] = 0
         tempDict['typeOfWork'] = ""
+        tempDict['salary'] = [int(float(salaryArray[1][:-1])*1000), int(float(salaryArray[3][:-1])*1000)] if len(salaryArray) > 3 else [0, 'JobStreet']
+        tempDict['yearOfExperience'] = yearsOfExpDict[i] if i in yearsOfExpDict else [0]
+        tempDict['noOfApplicants'] = 0
+        tempDict['typeOfWork'] = ''
         tempDict['source'] = ["JobStreet", job_link_dict[i]]
 
         searchQueryDict.append(tempDict)
 
     #
-    # print(searchQueryDict)
+    print(searchQueryDict)
     return searchQueryDict
+
+jobStreetScraper("software engineer")
