@@ -30,7 +30,7 @@ def getTime():
         print("POST")
         data = request.get_json()
         print(data)
-        print(data['searchfield'])
+        print(data['searchfield'])  
         
         jobStreetData = jobStreetScraper(data['searchfield'])
         grabJobData = grabJobScraper(data['searchfield'])
