@@ -93,14 +93,11 @@ def jobStreetScraper(searchKey):
         # print(salaryArray)
         # print([int(float(salaryArray[1][:-1])*1000), int(float(salaryArray[3][:-1])*1000)] if len(salaryArray) > 3 else ['', 'JobStreet'])
         # tempDict['salary'] = [sal[i],"JobStreet"] if i < len(sal) else ["","JobStreet"]
-        tempDict['salary'] = [int(float(salaryArray[1][:-1])*1000), int(float(salaryArray[3][:-1])*1000)] if len(salaryArray) > 3 else ['', 'JobStreet']
-        tempDict['yearOfExperience'] = yearsOfExpDict[i] if i in yearsOfExpDict else []
-        tempDict['noOfApplicants'] = 0
-        tempDict['typeOfWork'] = ""
-        tempDict['salary'] = [int(float(salaryArray[1][:-1])*1000), int(float(salaryArray[3][:-1])*1000)] if len(salaryArray) > 3 else [0, 'JobStreet']
+        tempDict['jobTitle'] = [job_title_dict[i]]
+        tempDict['salary'] = [int(float(salaryArray[1][:-1])*1000), int(float(salaryArray[3][:-1])*1000)] if len(salaryArray) > 3 else [[0,0], 'JobStreet']
         tempDict['yearOfExperience'] = yearsOfExpDict[i] if i in yearsOfExpDict else [0]
         tempDict['noOfApplicants'] = 0
-        tempDict['typeOfWork'] = ''
+        tempDict['typeOfWork'] = 'Hybrid'
         tempDict['source'] = ["JobStreet", job_link_dict[i]]
 
         searchQueryDict.append(tempDict)

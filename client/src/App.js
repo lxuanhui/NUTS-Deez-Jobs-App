@@ -12,46 +12,47 @@ function App() {
     const handleChange = (event) => {
         setSearchfield(event.target.value);
     };
+    const [isLoading, setIsLoading] = useState(false);
 
     const [data, setData] =  useState({});
     const [open, setOpen] = useState(false);
     const [ salary, setSalary ] = useState(0);
     const [ years, setYears ] = useState(0);
-    const [checkboxesApplicants, setCheckboxesApplicants] = useState({
-      'Applicants-1': false,
-      'Applicants-2': false,
-      'Applicants-3': false,
+    const [filter, setFilter] = useState({
+      salary: 0,
+      years: 0,
+      selectedCheckboxesLocation: {'remote': false, 'onsite': false, 'hybrid': false},
     });
+    
+
     const [checkboxesLocation, setCheckboxesLocation] = useState({
-      'location-1': false,
-      'location-2': false,
-      'location-3': false,
+      'remote': false,
+      'onsite': false,
+      'hybrid': false,
     });
     const handleChangeCheckboxLocation = (e) => {
       const checkboxIdLocation = e.target.id;
       const isChecked = e.target.checked;
 
       setCheckboxesLocation({ ...checkboxesLocation, [checkboxIdLocation]: isChecked });
+
     };
     const selectedCheckboxesLocation = Object.keys(checkboxesLocation).filter(
       (checkboxIdLocation) => checkboxesLocation[checkboxIdLocation]
-    );
 
+    );
     
-    
-    const handleCheckboxChangeApplicants = (e) => {
-      const checkboxIdApplicants = e.target.id;
-      const isChecked = e.target.checked;
-    
-      setCheckboxesApplicants({ ...checkboxesApplicants, [checkboxIdApplicants]: isChecked });
+
+
+    const handleClosing = () => {
+      setOpen(false);
+      // pass in the salary and years of experience, and the selected checkboxes to the table component
+      setFilter({salary, years, selectedCheckboxesLocation});
+      
     };
-    
-    const selectedCheckboxesApplicants = Object.keys(checkboxesApplicants).filter(
-      (checkboxIdApplicants) => checkboxesApplicants[checkboxIdApplicants]
-    );
-
 
     const handleSubmit = async (event) => {
+      setIsLoading(true);
       event.preventDefault();
       const requestBody = { 
         'searchfield': searchfield,
@@ -68,11 +69,15 @@ function App() {
       .then(data => {
         console.log(data);
         setData(data);
+        setIsLoading(false);
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error)
+      ,setIsLoading(false));
     };
     
-
+    if (isLoading) {
+      return <div style={{width:'100vw', marginTop:'40vh', justifyContent:'center', display:'flex', alignItems:'center', fontSize:'2rem'}}>Loading &#128070;</div>;
+  };
     
   return (
     <div className="App"> 
@@ -104,7 +109,7 @@ function App() {
               </Stack>
               <div style={{ marginTop: '8rem', position: 'absolute', marginLeft:'25vw' }}>
                 <div style={{ backgroundColor: '#fff', padding: '10px' }}>
-                  <Collapse in={open}>
+                  <Collapse in={open} onExiting={handleClosing} >
                     <div>
                       <Stack>
                       <Card className="flex-row modal-card" style={{width:'50vw'}}>
@@ -118,7 +123,7 @@ function App() {
                           <RangeSlider
 
                             value={salary}
-                            onChange={changeEvent => setSalary(changeEvent.target.value)}
+                            onChange={changeEvent => setSalary(parseInt(changeEvent.target.value))}
                             min={0}
                             max={15000}
                             step={500}
@@ -153,49 +158,6 @@ function App() {
                       </Card>
                       <Card className="flex-row modal-card" style={{width:'50vw'}}>
                         <Col lg={3} style={{textAlign:'center', justifyContent:'center', alignItems:'center', display:'flex'}}>
-                          Number of Applicants:
-                        </Col>
-                        <Col lg={9}>
-                          
-                          <Card.Body className="companyLogo">
-                          <div  className="mb-3 inline-checkbox">
-                            <Form.Check
-                              inline
-                              label="Lowest (lowest number of applicants)"
-                              name="group1"
-                              type='checkbox'
-                              id={`Applicants-1`}
-                              onChange={handleCheckboxChangeApplicants}
-                              checked={checkboxesApplicants["Applicants-1"]}
-                              
-                            />
-                            <Form.Check
-                              inline
-                              label="Average (Average number of applicants)"
-                              name="group1"
-                              type='checkbox'
-                              id={`Applicants-2`}
-                              onChange={handleCheckboxChangeApplicants}
-                              checked={checkboxesApplicants["Applicants-2"]}
-                              
-                            />
-                            <Form.Check
-                              inline
-                              name="group1"
-                              label="Highest (Highest number of applicants)"
-                              type='checkbox'
-                              id={`Applicants-3`}
-                              onChange={handleCheckboxChangeApplicants}
-                              checked={checkboxesApplicants["Applicants-3"]}
-                              
-                            />
-                          </div>
-                          <p>Selected values: {selectedCheckboxesApplicants.join(", ")}</p>
-                          </Card.Body>
-                        </Col>
-                      </Card>
-                      <Card className="flex-row modal-card" style={{width:'50vw'}}>
-                        <Col lg={3} style={{textAlign:'center', justifyContent:'center', alignItems:'center', display:'flex'}}>
                           Location:
                         </Col>
                         <Col lg={9}>
@@ -207,9 +169,9 @@ function App() {
                               label="Remote"
                               name="group1"
                               type='checkbox'
-                              id={`location-1`}
+                              id={`remote`}
                               onChange={handleChangeCheckboxLocation}
-                              checked={checkboxesLocation["location-1"]}
+                              checked={checkboxesLocation["remote"]}
                               
                             />
                             <Form.Check
@@ -217,9 +179,9 @@ function App() {
                               label="Onsite"
                               name="group1"
                               type='checkbox'
-                              id={`location-2`}
+                              id={`onsite`}
                               onChange={handleChangeCheckboxLocation}
-                              checked={checkboxesLocation["location-2"]}
+                              checked={checkboxesLocation["onsite"]}
                               
                             />
                             <Form.Check
@@ -227,14 +189,12 @@ function App() {
                               name="group1"
                               label="Hyrbrid"
                               type='checkbox'
-                              id={`location-3`}
+                              id={`hybrid`}
                               onChange={handleChangeCheckboxLocation}
-                              checked={checkboxesLocation["location-3"]}
+                              checked={checkboxesLocation["hyrbrid"]}
                               
                             />
                           </div>
-                          <p>Selected values: {selectedCheckboxesLocation.join(", ")}</p>
-
                           </Card.Body>
                         </Col>
                       </Card>
@@ -248,7 +208,7 @@ function App() {
               </div>
             </Form.Group>
         </Form>
-        <JobTable jobsObject={data} />
+        <JobTable jobsObject={data} filter= {filter} />
       
     </div>
   );
