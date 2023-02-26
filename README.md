@@ -1,6 +1,6 @@
-# Nut Job App - iNTUition v9.0 Hackathon
+# Deez Job App - iNTUition v9.0 Hackathon
 
-Welcome to Nut Job App, a platform designed to help you find and apply for the perfect job. With Nut Job App, you can search for jobs based on your preferences and requirements, compare job roles and salaries, and even write a cover letter to apply for the job.
+Welcome to Deez Job App, a platform designed to help you find and apply for the perfect job. With Deez Job App, you can search for jobs based on your preferences and requirements, compare job roles and salaries, and even write a cover letter to apply for the job.
 
 Features
 ---------------
