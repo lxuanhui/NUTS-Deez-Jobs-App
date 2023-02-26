@@ -1,16 +1,14 @@
 import os
-from dotenv import load_dotenv
 import openai
 
 def writeMeACoverLetter(link):
-    load_dotenv()
-    openai.organization = os.getenv('ORG')
-    openai.api_key = os.getenv('OPENAIAPI')
+    openai.organization = "org-3qrorO1sTvogGL7QedvrM6ZO"
+    openai.api_key = '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'
     response = openai.Completion.create(
         model="text-davinci-001",
         prompt= link + " Write me a professional cover letter to apply for this job in less than 200 words",
-        max_tokens=150,
-        temperature= 1,
+        max_tokens=200,
+        temperature= 0.7,
         top_p= 1,
         frequency_penalty= 1,
         presence_penalty= 1,
